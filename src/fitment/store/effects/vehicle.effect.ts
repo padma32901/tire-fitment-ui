@@ -1,10 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
-
-import { Action } from "@ngrx/store";
 import * as vehicleActions from "../actions/vehicle.action";
-import { catchError, map, mergeMap, switchMap } from "rxjs/operators";
+import { catchError, map, switchMap } from "rxjs/operators";
 import { FitmentService } from "../../services/fitment.service";
 
 @Injectable()
@@ -18,7 +16,7 @@ export class VehicleEffects {
   getYears$: Observable<any> = this.actions$.pipe(
     ofType(vehicleActions.LOAD_YEARS),
     switchMap(action => {
-      return this.fitmentService.getData("years").pipe(
+      return this.fitmentService.getData("years", action).pipe(
         map((data: any) => {
           return new vehicleActions.LoadYearsSuccess(data);
         }),
@@ -31,7 +29,7 @@ export class VehicleEffects {
   getMakes$: Observable<any> = this.actions$.pipe(
     ofType(vehicleActions.LOAD_MAKES),
     switchMap(action => {
-      return this.fitmentService.getData("makes").pipe(
+      return this.fitmentService.getData("makes", action).pipe(
         map((data: any) => {
           return new vehicleActions.LoadMakesSuccess(data);
         }),
@@ -43,8 +41,8 @@ export class VehicleEffects {
   @Effect()
   getModels$: Observable<any> = this.actions$.pipe(
     ofType(vehicleActions.LOAD_MODELS),
-    switchMap(() => {
-      return this.fitmentService.getData("models").pipe(
+    switchMap(action => {
+      return this.fitmentService.getData("models", action).pipe(
         map((data: any) => {
           return new vehicleActions.LoadModelsSuccess(data);
         }),
@@ -56,8 +54,8 @@ export class VehicleEffects {
   @Effect()
   getTrim$: Observable<any> = this.actions$.pipe(
     ofType(vehicleActions.LOAD_TRIM),
-    switchMap(() => {
-      return this.fitmentService.getData("trim").pipe(
+    switchMap(action => {
+      return this.fitmentService.getData("trim", action).pipe(
         map((data: any) => {
           return new vehicleActions.LoadTrimSuccess(data);
         }),

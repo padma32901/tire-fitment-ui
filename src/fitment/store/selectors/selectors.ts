@@ -1,5 +1,4 @@
 import { createSelector } from "@ngrx/store";
-import { FitmentState } from "../reducers";
 
 const getSelectedYears = (state: any): any => state.fitment.vehicle;
 const getSelectedMakes = (state: any): any => state.fitment.vehicle;

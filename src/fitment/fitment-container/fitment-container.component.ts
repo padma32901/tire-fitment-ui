@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { retry } from "rxjs/operators";
 import { FilterKeyPair } from "../interfaces/filter";
 
 import * as fromStore from "../store";
@@ -15,6 +14,7 @@ export class FitmentContainerComponent implements OnInit, OnDestroy {
   data$: Observable<any>;
   selectedType: string = "years";
   breadCrumbs: FilterKeyPair[] = [];
+  vehicle: string;
 
   // import the store into the constructor
   constructor(private _store: Store<fromStore.FitmentState>) {}
@@ -23,7 +23,7 @@ export class FitmentContainerComponent implements OnInit, OnDestroy {
   ngOnInit() {}
 
   getYears() {
-    this._store.dispatch(new fromStore.LoadYears());
+    this._store.dispatch(new fromStore.LoadYears(this.breadCrumbs));
     this.data$ = this._store.pipe(select(fromStore.allYears));
     this.resetFilters();
   }
@@ -31,44 +31,45 @@ export class FitmentContainerComponent implements OnInit, OnDestroy {
   OnItemClick(type: string, value: string) {
     this.selectedType = type;
     this.updateBreadCurmbs(type, value);
+    // Reqested data we can pass throguh here if needed .
     switch (type) {
       case "makes":
-        this._store.dispatch(new fromStore.LoadMakes());
+        this._store.dispatch(new fromStore.LoadMakes(this.breadCrumbs));
         this.data$ = this._store.pipe(select(fromStore.make));
         break;
       case "models":
-        this._store.dispatch(new fromStore.LoadModels());
+        this._store.dispatch(new fromStore.LoadModels(this.breadCrumbs));
         this.data$ = this._store.pipe(select(fromStore.model));
         break;
       case "trim":
-        this._store.dispatch(new fromStore.LoadTrim());
+        this._store.dispatch(new fromStore.LoadTrim(this.breadCrumbs));
         this.data$ = this._store.pipe(select(fromStore.trim));
         break;
     }
   }
 
   updateBreadCurmbs(type: string, value: string) {
+    let vehicle = "";
     const index = this.breadCrumbs.map(e => e.val).indexOf(value);
-    console.log(index);
     if (index == -1) {
+      debugger;
       let breadCrumb: FilterKeyPair = { key: type, val: value };
       this.breadCrumbs.push(breadCrumb);
     } else {
       this.breadCrumbs.splice(index + 1, this.breadCrumbs.length);
     }
+
+    this.breadCrumbs.forEach(item => {
+      vehicle += " " + item.val;
+    });
+    this.vehicle = vehicle;
   }
 
   resetFilters() {
     this.breadCrumbs = [];
+    this.vehicle = "";
   }
 
-  get vehicleDetail() {
-    let vehicle = "";
-    this.breadCrumbs.forEach(item => {
-      vehicle += " " + item.val;
-    });
-    return vehicle;
-  }
-
+  // This will trigger before moving out from the component
   ngOnDestroy() {}
 }

@@ -10,7 +10,6 @@ import { FitmentService } from "./services/fitment.service";
 
 @NgModule({
   imports: [CommonModule, StoreModule.forFeature("fitment", reducers)],
-
   declarations: [FitmentContainerComponent],
   exports: [FitmentContainerComponent],
   providers: [FitmentService]

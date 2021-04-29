@@ -21,6 +21,7 @@ export const LOAD_TRIM_SUCCESS = "[Fitment] Load Trim Success";
 // Action creators
 export class LoadYears implements Action {
   readonly type = LOAD_YEARS;
+  constructor(public payload: any) {}
 }
 export class LoadYearsFail implements Action {
   readonly type = LOAD_YEARS_FAIL;
@@ -34,6 +35,7 @@ export class LoadYearsSuccess implements Action {
 // Makes
 export class LoadMakes implements Action {
   readonly type = LOAD_MAKES;
+  constructor(public payload: any) {}
 }
 export class LoadMakesFail implements Action {
   readonly type = LOAD_MAKES_FAIL;
@@ -48,6 +50,7 @@ export class LoadMakesSuccess implements Action {
 
 export class LoadModels implements Action {
   readonly type = LOAD_MODELS;
+  constructor(public payload: any) {}
 }
 export class LoadModelsFail implements Action {
   readonly type = LOAD_MODELS_FAIL;
@@ -61,6 +64,7 @@ export class LoadModelsSuccess implements Action {
 // Trim
 export class LoadTrim implements Action {
   readonly type = LOAD_TRIM;
+  constructor(public payload: any) {}
 }
 export class LoadTrimFail implements Action {
   readonly type = LOAD_TRIM_FAIL;
