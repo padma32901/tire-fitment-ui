@@ -38,9 +38,6 @@ export function reducer(
       };
     }
     case fromVehicle.LOAD_YEARS_SUCCESS: {
-      // console.log("current state:");
-      // console.log(state);
-      // console.log(action.payload);
       return {
         ...state,
         years: action.payload.year,

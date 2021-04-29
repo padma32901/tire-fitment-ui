@@ -18,11 +18,7 @@ export class FitmentContainerComponent implements OnInit {
 
   getYears() {
     this._store.dispatch(new fromStore.LoadYears());
-    const users$ = this._store.pipe(select(fromStore.allYears));
-    users$.subscribe(res => {
-      console.log("inth component");
-      console.log(res);
-    });
+    this.years$ = this._store.pipe(select(fromStore.allYears));
 
     // dispatch an action to get array of years
 
