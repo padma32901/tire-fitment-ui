@@ -11,7 +11,7 @@ import * as fromStore from "../store";
 export class FitmentContainerComponent implements OnInit {
   data$: Observable<any>;
   breadCrumbes: string[];
-  selectedType: string = "";
+  selectedType: string = "years";
 
   // import the store into the constructor
   constructor(private _store: Store<fromStore.FitmentState>) {}

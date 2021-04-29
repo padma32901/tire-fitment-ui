@@ -9,11 +9,15 @@
   </nav>
   <div class="panel panel-default">
     <div class="panel-body">
-      <div class="data">
-        <p *ngFor="let item of data$ | async">
-          <button class="button" (click)="OnItemClick(selectedType, item)"><span>{{item}} </span></button>
-        </p>
+      <div [ngSwitch]="selectedType">
+        {{selectedType === 'years'}}
+        <div class="data" *ngSwitchCase="selectedType === 'years'">
+          <p *ngFor="let item of data$ | async">
+            <button class="button" (click)="OnItemClick(selectedType, item)"><span>{{item}} </span></button>
+          </p>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
