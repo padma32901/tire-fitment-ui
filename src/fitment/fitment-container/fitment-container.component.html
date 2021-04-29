@@ -10,10 +10,11 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div [ngSwitch]="selectedType">
-        {{selectedType === 'years'}}
-        <div class="data" *ngSwitchCase="selectedType === 'years'">
+
+        <div class="data" *ngSwitchCase="'years'">
+          {{selectedType === 'years'}}
           <p *ngFor="let item of data$ | async">
-            <button class="button" (click)="OnItemClick(selectedType, item)"><span>{{item}} </span></button>
+            <button class="button" (click)="OnItemClick('makes', item)"><span>{{item}} </span></button>
           </p>
         </div>
       </div>

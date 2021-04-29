@@ -11,10 +11,6 @@ import { VehicleState } from "../store/reducers/vehicle.reducer";
 export class FitmentService {
   baseUrl = "https://6080be3273292b0017cdbf2a.mockapi.io/";
 
-  makesUrl = "https://6080be3273292b0017cdbf2a.mockapi.io/makes";
-  modelsUrl = "https://6080be3273292b0017cdbf2a.mockapi.io/models";
-  trimUrl = "https://6080be3273292b0017cdbf2a.mockapi.io/trim";
-
   constructor(private http: HttpClient) {}
 
   // const headers = new HttpHeaders({ "Content-Type": "application/json" });

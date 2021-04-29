@@ -27,15 +27,17 @@ export class FitmentContainerComponent implements OnInit {
       case "years":
         this._store.dispatch(new fromStore.LoadYears());
         this.data$ = this._store.pipe(select(fromStore.allYears));
-        this.selectedType = "makes";
+        this.data$.subscribe(res => {
+          console.log(res);
+        });
       case "makes":
         this._store.dispatch(new fromStore.LoadMakes());
         this.data$ = this._store.pipe(select(fromStore.make));
-        this.selectedType = "models";
+        //this.selectedType = "models";
         break;
       case "models":
         this._store.dispatch(new fromStore.LoadYears());
-        this.selectedType = "trim";
+        //this.selectedType = "trim";
         break;
       case "trim":
         this._store.dispatch(new fromStore.LoadYears());
