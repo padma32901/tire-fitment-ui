@@ -10,6 +10,8 @@ import * as fromVehicle from "../actions";
 export interface VehicleState {
   years: string[];
   make: string[];
+  model: string[];
+  trim: string[];
   loaded: boolean;
   loading: boolean;
 }
@@ -17,6 +19,8 @@ export interface VehicleState {
 export const initialState: VehicleState = {
   years: [],
   make: [],
+  model: [],
+  trim: [],
   loaded: false,
   loading: false
 };
@@ -88,7 +92,7 @@ export function reducer(
     case fromVehicle.LOAD_MODELS_SUCCESS: {
       return {
         ...state,
-        make: action.payload.model,
+        model: action.payload.model,
         loaded: false,
         loading: true
       };
@@ -111,7 +115,7 @@ export function reducer(
     case fromVehicle.LOAD_TRIM_SUCCESS: {
       return {
         ...state,
-        make: action.payload.trim,
+        trim: action.payload.trim,
         loaded: false,
         loading: true
       };

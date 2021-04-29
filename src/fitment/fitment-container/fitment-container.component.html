@@ -1,10 +1,10 @@
 <div class="container">
   <button class="button" (click)="getYears()"> Select vehicle </button>
   <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    <ol class="breadcrumb">      
+      <li *ngFor="let filter of breadCrumbs" class="breadcrumb-item">
+        <a (click)="OnItemClick(filter.key, filter.val)">{{filter.val}}</a>
+      </li>
     </ol>
   </nav>
   <div class="panel panel-default">

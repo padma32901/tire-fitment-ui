@@ -44,7 +44,7 @@ export class VehicleEffects {
   getModels$: Observable<any> = this.actions$.pipe(
     ofType(vehicleActions.LOAD_MODELS),
     switchMap(() => {
-      return this.fitmentService.getData().pipe(
+      return this.fitmentService.getData("models").pipe(
         map((data: any) => {
           return new vehicleActions.LoadModelsSuccess(data);
         }),
@@ -57,7 +57,7 @@ export class VehicleEffects {
   getTrim$: Observable<any> = this.actions$.pipe(
     ofType(vehicleActions.LOAD_TRIM),
     switchMap(() => {
-      return this.fitmentService.getData().pipe(
+      return this.fitmentService.getData("trim").pipe(
         map((data: any) => {
           return new vehicleActions.LoadTrimSuccess(data);
         }),
