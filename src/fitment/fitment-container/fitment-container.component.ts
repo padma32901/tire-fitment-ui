@@ -13,11 +13,14 @@ import * as fromStore from "../store";
 export class FitmentContainerComponent implements OnInit, OnDestroy {
   data$: Observable<any>;
   selectedType: string = "years";
-  breadCrumbs: FilterKeyPair[] = [];
+  breadCrumbs: any[] = [];
   vehicle: string;
+  
 
   // import the store into the constructor
-  constructor(private _store: Store<fromStore.FitmentState>) {}
+  constructor(private _store: Store<fromStore.FitmentState>) {
+   
+  }
 
   // This ngOnInit will be useful when you want to any stuff when component intialiaze. Since i didn't have requirement to do any thing here i just added without any implementation
   ngOnInit() {}
@@ -50,13 +53,13 @@ export class FitmentContainerComponent implements OnInit, OnDestroy {
 
   updateBreadCurmbs(type: string, value: string) {
     let vehicle = "";
-    const index = this.breadCrumbs.map(e => e.val).indexOf(value);
+    let breadCrumbs: any[] = JSON.parse(JSON.stringify(this.breadCrumbs));
+    const index = this.breadCrumbs.findIndex(x => x.val === value);
     if (index == -1) {
-      debugger;
-      let breadCrumb: FilterKeyPair = { key: type, val: value };
-      this.breadCrumbs.push(breadCrumb);
+      breadCrumbs.push({ key: type, val: value });
+      this.breadCrumbs = breadCrumbs;
     } else {
-      this.breadCrumbs.splice(index + 1, this.breadCrumbs.length);
+      this.breadCrumbs.splice(index, this.breadCrumbs.length - 1);
     }
 
     this.breadCrumbs.forEach(item => {
