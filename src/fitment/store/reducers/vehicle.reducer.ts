@@ -48,10 +48,70 @@ export function reducer(
       };
     }
 
+    case fromVehicle.LOAD_MAKES: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
+    case fromVehicle.LOAD_MAKES_FAIL: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
     case fromVehicle.LOAD_MAKES_SUCCESS: {
       return {
         ...state,
         make: action.payload.make,
+        loaded: false,
+        loading: true
+      };
+    }
+
+    case fromVehicle.LOAD_MODELS: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
+    case fromVehicle.LOAD_MODELS_FAIL: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
+    case fromVehicle.LOAD_MODELS_SUCCESS: {
+      return {
+        ...state,
+        make: action.payload.model,
+        loaded: false,
+        loading: true
+      };
+    }
+
+    case fromVehicle.LOAD_TRIM: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
+    case fromVehicle.LOAD_TRIM_FAIL: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
+    case fromVehicle.LOAD_TRIM_SUCCESS: {
+      return {
+        ...state,
+        make: action.payload.trim,
         loaded: false,
         loading: true
       };

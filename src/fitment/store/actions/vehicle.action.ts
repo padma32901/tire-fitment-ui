@@ -34,7 +34,6 @@ export class LoadYearsSuccess implements Action {
 // Makes
 export class LoadMakes implements Action {
   readonly type = LOAD_MAKES;
-  readonly value = "makes";
 }
 export class LoadMakesFail implements Action {
   readonly type = LOAD_MAKES_FAIL;

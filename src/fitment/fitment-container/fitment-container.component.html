@@ -9,14 +9,32 @@
   </nav>
   <div class="panel panel-default">
     <div class="panel-body">
-      <div [ngSwitch]="selectedType">
 
+      <div [ngSwitch]="selectedType">
         <div class="data" *ngSwitchCase="'years'">
-          {{selectedType === 'years'}}
           <p *ngFor="let item of data$ | async">
             <button class="button" (click)="OnItemClick('makes', item)"><span>{{item}} </span></button>
           </p>
         </div>
+
+        <div class="data" *ngSwitchCase="'makes'">
+          <p *ngFor="let item of data$ | async">
+            <button class="button" (click)="OnItemClick('models', item)"><span>{{item}} </span></button>
+          </p>
+        </div>
+
+        <div class="data" *ngSwitchCase="'models'">
+          <p *ngFor="let item of data$ | async">
+            <button class="button" (click)="OnItemClick('trim', item)"><span>{{item}} </span></button>
+          </p>
+        </div>
+
+        <div class="data" *ngSwitchCase="'trim'">
+          <p *ngFor="let item of data$ | async">
+            <button class="button" ><span>{{item}} </span></button>
+          </p>
+        </div>
+
       </div>
 
     </div>

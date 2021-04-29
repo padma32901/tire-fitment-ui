@@ -40,29 +40,29 @@ export class VehicleEffects {
     })
   );
 
-  // @Effect()
-  // getModels$: Observable<any> = this.actions$.pipe(
-  //   ofType(vehicleActions.LOAD_MODELS),
-  //   switchMap(() => {
-  //     return this.fitmentService.getData().pipe(
-  //       map((data: any) => {
-  //         return new vehicleActions.LoadYearsSuccess(data);
-  //       }),
-  //       catchError(error => of(new vehicleActions.LoadYearsFail(error)))
-  //     );
-  //   })
-  // );
+  @Effect()
+  getModels$: Observable<any> = this.actions$.pipe(
+    ofType(vehicleActions.LOAD_MODELS),
+    switchMap(() => {
+      return this.fitmentService.getData().pipe(
+        map((data: any) => {
+          return new vehicleActions.LoadModelsSuccess(data);
+        }),
+        catchError(error => of(new vehicleActions.LoadModelsFail(error)))
+      );
+    })
+  );
 
-  // @Effect()
-  // getTrim$: Observable<any> = this.actions$.pipe(
-  //   ofType(vehicleActions.LOAD_TRIM),
-  //   switchMap(() => {
-  //     return this.fitmentService.getData().pipe(
-  //       map((data: any) => {
-  //         return new vehicleActions.LoadYearsSuccess(data);
-  //       }),
-  //       catchError(error => of(new vehicleActions.LoadYearsFail(error)))
-  //     );
-  //   })
-  // );
+  @Effect()
+  getTrim$: Observable<any> = this.actions$.pipe(
+    ofType(vehicleActions.LOAD_TRIM),
+    switchMap(() => {
+      return this.fitmentService.getData().pipe(
+        map((data: any) => {
+          return new vehicleActions.LoadTrimSuccess(data);
+        }),
+        catchError(error => of(new vehicleActions.LoadTrimFail(error)))
+      );
+    })
+  );
 }
