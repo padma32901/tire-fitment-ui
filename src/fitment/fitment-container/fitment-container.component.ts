@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { retry } from "rxjs/operators";
 import { FilterKeyPair } from "../interfaces/filter";
 
 import * as fromStore from "../store";
@@ -10,15 +11,15 @@ import * as fromStore from "../store";
   templateUrl: "./fitment-container.component.html",
   styleUrls: ["./fitment-container.component.css"]
 })
-export class FitmentContainerComponent implements OnInit {
+export class FitmentContainerComponent implements OnInit, OnDestroy {
   data$: Observable<any>;
-  breadCrumbes: string[];
   selectedType: string = "years";
   breadCrumbs: FilterKeyPair[] = [];
 
   // import the store into the constructor
   constructor(private _store: Store<fromStore.FitmentState>) {}
 
+  // This ngOnInit will be useful when you want to any stuff when component intialiaze. Since i didn't have requirement to do any thing here i just added without any implementation
   ngOnInit() {}
 
   getYears() {
@@ -61,12 +62,13 @@ export class FitmentContainerComponent implements OnInit {
     this.breadCrumbs = [];
   }
 
-  // Make with year (2021)
-  // https://6080be3273292b0017cdbf2a.mockapi.io/makes
+  get vehicleDetail() {
+    let vehicle = "";
+    this.breadCrumbs.forEach(item => {
+      vehicle += " " + item.val;
+    });
+    return vehicle;
+  }
 
-  // Model with year and make (Acura)
-  // https://6080be3273292b0017cdbf2a.mockapi.io/models
-
-  // Trim with year, make, model (RDX)
-  // https://6080be3273292b0017cdbf2a.mockapi.io/trim
+  ngOnDestroy() {}
 }

@@ -1,12 +1,15 @@
 <div class="container">
   <button class="button" (click)="getYears()"> Select vehicle </button>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">      
+  <nav aria-label="breadcrumb" *ngIf="breadCrumbs.length > 0">
+    <ol class="breadcrumb">
       <li *ngFor="let filter of breadCrumbs" class="breadcrumb-item">
         <a (click)="OnItemClick(filter.key, filter.val)">{{filter.val}}</a>
       </li>
     </ol>
   </nav>
+  <div *ngIf="vehicleDetail!==''">
+    Vehicle: {{vehicleDetail}}
+  </div>
   <div class="panel panel-default">
     <div class="panel-body">
 
