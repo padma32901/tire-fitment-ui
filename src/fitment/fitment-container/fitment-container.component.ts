@@ -15,12 +15,10 @@ export class FitmentContainerComponent implements OnInit, OnDestroy {
   selectedType: string = "years";
   breadCrumbs: any[] = [];
   vehicle: string;
-  
+  showMessage: boolean = true;
 
   // import the store into the constructor
-  constructor(private _store: Store<fromStore.FitmentState>) {
-   
-  }
+  constructor(private _store: Store<fromStore.FitmentState>) {}
 
   // This ngOnInit will be useful when you want to any stuff when component intialiaze. Since i didn't have requirement to do any thing here i just added without any implementation
   ngOnInit() {}

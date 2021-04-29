@@ -5,3 +5,8 @@
 p {
   float: left;
 }
+
+.empty-message {
+  padding: 40px;
+  color: gray;
+}
