@@ -17,8 +17,8 @@ export class VehicleEffects {
   @Effect()
   getYears$: Observable<any> = this.actions$.pipe(
     ofType(vehicleActions.LOAD_YEARS),
-    switchMap(() => {
-      return this.fitmentService.getYears().pipe(
+    switchMap(action => {
+      return this.fitmentService.getData("years").pipe(
         map((data: any) => {
           return new vehicleActions.LoadYearsSuccess(data);
         }),
@@ -26,4 +26,43 @@ export class VehicleEffects {
       );
     })
   );
+
+  @Effect()
+  getMakes$: Observable<any> = this.actions$.pipe(
+    ofType(vehicleActions.LOAD_MAKES),
+    switchMap(action => {
+      return this.fitmentService.getData("makes").pipe(
+        map((data: any) => {
+          return new vehicleActions.LoadMakesSuccess(data);
+        }),
+        catchError(error => of(new vehicleActions.LoadMakesFail(error)))
+      );
+    })
+  );
+
+  // @Effect()
+  // getModels$: Observable<any> = this.actions$.pipe(
+  //   ofType(vehicleActions.LOAD_MODELS),
+  //   switchMap(() => {
+  //     return this.fitmentService.getData().pipe(
+  //       map((data: any) => {
+  //         return new vehicleActions.LoadYearsSuccess(data);
+  //       }),
+  //       catchError(error => of(new vehicleActions.LoadYearsFail(error)))
+  //     );
+  //   })
+  // );
+
+  // @Effect()
+  // getTrim$: Observable<any> = this.actions$.pipe(
+  //   ofType(vehicleActions.LOAD_TRIM),
+  //   switchMap(() => {
+  //     return this.fitmentService.getData().pipe(
+  //       map((data: any) => {
+  //         return new vehicleActions.LoadYearsSuccess(data);
+  //       }),
+  //       catchError(error => of(new vehicleActions.LoadYearsFail(error)))
+  //     );
+  //   })
+  // );
 }

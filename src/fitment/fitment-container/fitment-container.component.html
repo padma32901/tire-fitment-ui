@@ -1,11 +1,19 @@
-<button class="button" (click)="getYears()"> Select vehicle </button>
 <div class="container">
-  <h2>Tire fitment engine</h2>
+  <button class="button" (click)="getYears()"> Select vehicle </button>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+  </nav>
   <div class="panel panel-default">
     <div class="panel-body">
-      <p *ngFor="let year of years$ | async">
-        <button class="button"><span>{{year}} </span></button>
-      </p>
+      <div class="data">
+        <p *ngFor="let item of data$ | async">
+          <button class="button" (click)="OnItemClick(selectedType, item)"><span>{{item}} </span></button>
+        </p>
+      </div>
     </div>
   </div>
 </div>

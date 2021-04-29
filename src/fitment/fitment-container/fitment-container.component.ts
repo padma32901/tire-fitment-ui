@@ -9,7 +9,9 @@ import * as fromStore from "../store";
   styleUrls: ["./fitment-container.component.css"]
 })
 export class FitmentContainerComponent implements OnInit {
-  years$: Observable<any>;
+  data$: Observable<any>;
+  breadCrumbes: string[];
+  selectedType: string = "";
 
   // import the store into the constructor
   constructor(private _store: Store<fromStore.FitmentState>) {}
@@ -17,15 +19,29 @@ export class FitmentContainerComponent implements OnInit {
   ngOnInit() {}
 
   getYears() {
-    this._store.dispatch(new fromStore.LoadYears());
-    this.years$ = this._store.pipe(select(fromStore.allYears));
-
-    // dispatch an action to get array of years
-
-    // Year
-    // https://6080be3273292b0017cdbf2a.mockapi.io/years
+    this.OnItemClick("years", "");
   }
 
+  OnItemClick(type: string, value: string) {
+    switch (type) {
+      case "years":
+        this._store.dispatch(new fromStore.LoadYears());
+        this.data$ = this._store.pipe(select(fromStore.allYears));
+        this.selectedType = "makes";
+      case "makes":
+        this._store.dispatch(new fromStore.LoadMakes());
+        this.data$ = this._store.pipe(select(fromStore.make));
+        this.selectedType = "models";
+        break;
+      case "models":
+        this._store.dispatch(new fromStore.LoadYears());
+        this.selectedType = "trim";
+        break;
+      case "trim":
+        this._store.dispatch(new fromStore.LoadYears());
+        break;
+    }
+  }
   // Make with year (2021)
   // https://6080be3273292b0017cdbf2a.mockapi.io/makes
 

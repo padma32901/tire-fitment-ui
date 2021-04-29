@@ -5,16 +5,18 @@
 // Create reducer function and pass in initial state and actions.
 // Return new state
 
-import * as fromVehicle from "../actions/vehicle.action";
+import * as fromVehicle from "../actions";
 
 export interface VehicleState {
   years: string[];
+  make: string[];
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: VehicleState = {
   years: [],
+  make: [],
   loaded: false,
   loading: false
 };
@@ -43,6 +45,15 @@ export function reducer(
         years: action.payload.year,
         loaded: true,
         loading: false
+      };
+    }
+
+    case fromVehicle.LOAD_MAKES_SUCCESS: {
+      return {
+        ...state,
+        make: action.payload.make,
+        loaded: false,
+        loading: true
       };
     }
   }
