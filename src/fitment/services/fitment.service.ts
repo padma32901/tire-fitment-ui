@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { Subject, Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, catchError } from "rxjs/operators";
+import { FitmentState } from "../store";
+import { VehicleState } from "../store/reducers/vehicle.reducer";
 
 @Injectable({
   providedIn: "root"
@@ -16,7 +18,7 @@ export class FitmentService {
     const options = { headers };
     // Not added any authentication token Since there is no authenication needed
     return this.http.get(this.yearUrl, options).pipe(
-      map((response: Response) => response),
+      map((response: any) => response),
       catchError(err => {
         console.log(err);
         return of([]);

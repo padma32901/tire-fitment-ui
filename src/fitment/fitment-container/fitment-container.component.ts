@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import * as fromUsers from "../store";
+import * as fromStore from "../store";
 
 @Component({
   selector: "app-fitment-container",
@@ -12,17 +12,17 @@ export class FitmentContainerComponent implements OnInit {
   years$: Observable<any>;
 
   // import the store into the constructor
-  constructor(private _store: Store<fromUsers.FitmentState>) {}
+  constructor(private _store: Store<fromStore.FitmentState>) {}
 
-  ngOnInit() {
-    const users$ = this._store.pipe(select(fromUsers.allYears));
-    users$.subscribe(res => {
-      console.log(res);
-    });
-  }
+  ngOnInit() {}
 
   getYears() {
-    console.log("getYears");
+    this._store.dispatch(new fromStore.LoadYears());
+    const users$ = this._store.pipe(select(fromStore.allYears));
+    users$.subscribe(res => {
+      console.log("inth component");
+      console.log(res);
+    });
 
     // dispatch an action to get array of years
 
