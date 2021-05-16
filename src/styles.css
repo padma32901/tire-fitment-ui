@@ -1,39 +1,31 @@
 /* Add application styles & imports to this file! */
+
 .button {
-  border-radius: 4px;
-  background-color: #1ec2f4;
+  background-color: #f4501ee0;
   border: none;
-  color: #ffffff;
+  color: white;
+  padding: 7px 10px;
   text-align: center;
-  font-size: 13px;
-  padding: 5px;
-  width: 100px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: "\00bb";
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
+  font-size: 14px;
+  margin: 4px 2px;
   opacity: 1;
-  right: 0;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.panel-body {
+  overflow: scroll;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+.breadcrumb {
+  background-color: #0e5d7099;
+}
+
+a {
+  color: white;
 }

@@ -1,18 +1,18 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { FilterKeyPair } from "../interfaces/filter";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { FilterKeyPair } from '../interfaces/filter';
 
-import * as fromStore from "../store";
+import * as fromStore from '../store';
 
 @Component({
-  selector: "app-fitment-container",
-  templateUrl: "./fitment-container.component.html",
-  styleUrls: ["./fitment-container.component.css"]
+  selector: 'app-fitment-container',
+  templateUrl: './fitment-container.component.html',
+  styleUrls: ['./fitment-container.component.css']
 })
 export class FitmentContainerComponent implements OnInit, OnDestroy {
   data$: Observable<any>;
-  selectedType: string = "years";
+  selectedType: string = 'years';
   breadCrumbs: any[] = [];
   vehicle: string;
   showMessage: boolean = true;
@@ -29,20 +29,20 @@ export class FitmentContainerComponent implements OnInit, OnDestroy {
     this.resetFilters();
   }
 
-  OnItemClick(type: string, value: string) {
-    this.selectedType = type;
-    this.updateBreadCurmbs(type, value);
+  OnItemClick(nextType: string, value: string) {
+    this.selectedType = nextType;
+    this.updateBreadCurmbs(nextType, value);
     // Reqested data we can pass throguh here if needed .
-    switch (type) {
-      case "makes":
+    switch (nextType) {
+      case 'makes':
         this._store.dispatch(new fromStore.LoadMakes(this.breadCrumbs));
         this.data$ = this._store.pipe(select(fromStore.make));
         break;
-      case "models":
+      case 'models':
         this._store.dispatch(new fromStore.LoadModels(this.breadCrumbs));
         this.data$ = this._store.pipe(select(fromStore.model));
         break;
-      case "trim":
+      case 'trim':
         this._store.dispatch(new fromStore.LoadTrim(this.breadCrumbs));
         this.data$ = this._store.pipe(select(fromStore.trim));
         break;
@@ -50,25 +50,25 @@ export class FitmentContainerComponent implements OnInit, OnDestroy {
   }
 
   updateBreadCurmbs(type: string, value: string) {
-    let vehicle = "";
+    let vehicle = '';
     let breadCrumbs: any[] = JSON.parse(JSON.stringify(this.breadCrumbs));
     const index = this.breadCrumbs.findIndex(x => x.val === value);
     if (index == -1) {
       breadCrumbs.push({ key: type, val: value });
-      this.breadCrumbs = breadCrumbs;
     } else {
-      this.breadCrumbs.splice(index, this.breadCrumbs.length - 1);
+      breadCrumbs.splice(index + 1, this.breadCrumbs.length);
     }
+    this.breadCrumbs = breadCrumbs;
 
     this.breadCrumbs.forEach(item => {
-      vehicle += " " + item.val;
+      vehicle += ' ' + item.val;
     });
     this.vehicle = vehicle;
   }
 
   resetFilters() {
     this.breadCrumbs = [];
-    this.vehicle = "";
+    this.vehicle = '';
   }
 
   // This will trigger before moving out from the component
